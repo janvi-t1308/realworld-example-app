@@ -1,0 +1,35 @@
+services:
+  backend:
+    container_name: realworld-backend-example-app
+    image: realworld-backend-app:0.0.5
+    build: ./node-express-realworld-example-app
+    ports: 
+      - 8000:3000
+    env_file: ./node-express-realworld-example-app/.env
+    command: sh -c "npx prisma migrate deploy && npm start"
+    depends_on:
+      - postgres-db
+    restart: always
+
+  frontend:
+    container_name: realworld-frontend-example-app
+    image: realworld-frontend-app:0.0.2
+    build: ./react-redux-realworld-example-app
+    ports:
+      - 4100:4100
+    depends_on:
+      - backend
+    restart: always
+
+
+  postgres-db:
+    container_name: realworld-example-app-db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: realworld
+    ports:
+      - 5432:5432
+    restart: always
+
