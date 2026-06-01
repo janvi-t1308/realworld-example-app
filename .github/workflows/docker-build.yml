@@ -1,0 +1,22 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main
+  
+jobs:
+  build-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+    
+      - name: Build Backend image
+        run: |
+          docker build -t realworld-example-backend-app ./backend/node-express-realworld-example-app/
+
+      - name: Build Frontend image 
+        run: |
+          docker build -t realworld-example-frontend-app ./frontend/react-redux-realworld-example-app/s
