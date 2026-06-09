@@ -1,4 +1,4 @@
-name: Docker Build
+name: Docker Build And Push
 
 on:
   push:
@@ -12,11 +12,25 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Login to dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
     
       - name: Build Backend image
         run: |
           docker build -t realworld-example-backend-app ./backend/node-express-realworld-example-app/
+        
+      - name: Backend Image push
+        run: |
+          docker push janvitikkiwal/realworld-backend:latest
 
       - name: Build Frontend image 
         run: |
           docker build -t realworld-example-frontend-app ./frontend/react-redux-realworld-example-app/
+        
+      - name: Frontend Image push
+        run: |
+          docker push janvitikkiwal/realworld-frontend:latest 
