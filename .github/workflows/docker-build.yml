@@ -19,4 +19,4 @@ jobs:
 
       - name: Build Frontend image 
         run: |
-          docker build -t realworld-example-frontend-app ./frontend/react-redux-realworld-example-app/s
+          docker build -t realworld-example-frontend-app ./frontend/react-redux-realworld-example-app/
