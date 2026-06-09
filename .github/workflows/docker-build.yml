@@ -21,16 +21,16 @@ jobs:
     
       - name: Build Backend image
         run: |
-          docker build -t realworld-example-backend-app ./backend/node-express-realworld-example-app/
+          docker build -t janvitikkiwal/realworld-example-backend-app ./backend/node-express-realworld-example-app/
         
       - name: Backend Image push
         run: |
-          docker push janvitikkiwal/realworld-backend:latest
+          docker push janvitikkiwal/realworld-example-backend-app:latest
 
       - name: Build Frontend image 
         run: |
-          docker build -t realworld-example-frontend-app ./frontend/react-redux-realworld-example-app/
+          docker build -t janvitikkiwal/realworld-example-frontend-app ./frontend/react-redux-realworld-example-app/
         
       - name: Frontend Image push
         run: |
-          docker push janvitikkiwal/realworld-frontend:latest 
+          docker push janvitikkiwal/realworld-example-frontend-app:latest 
